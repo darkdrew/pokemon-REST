@@ -1,0 +1,22 @@
+#search {
+  padding: 35px 15px;
+  text-align: center;
+}
+
+#search .wrapper {
+  margin: 0 auto;
+}
+
+/*=====================
+      Contents
+======================*/
+#content-container {
+  background:grey;
+  margin: 10px;
+}
+
+#content-container .card-list {
+    background:green;
+    border-radius: 1px solid black;
+    padding:20px;
+}
