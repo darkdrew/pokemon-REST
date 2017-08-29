@@ -11,7 +11,9 @@
 
     }
 
+
     this.getPokemon = function() {
+      var data = [];
         // var http = new XMLHttpRequest();
         // var url = `https://pokeapi.co/api/v1/pokemon/charmander/`;
         //
@@ -28,78 +30,115 @@
         //     }
         // }
         // http.send();
-        var urls = [`https://pokeapi.co/api/v1/pokemon/charmander/`, `https://pokeapi.co/api/v2/pokemon/charmander/`];
+        const urls = [`https://pokeapi.co/api/v1/pokemon/charmander/`, `https://pokeapi.co/api/v2/pokemon/charmander/`];
 
-        var url = `https://pokeapi.co/api/v1/pokemon/charmander/`;
+        // var url = `https://pokeapi.co/api/v1/pokemon/charmander/`;
         var url2 = `https://pokeapi.co/api/v2/pokemon/charmander/`;
 
-        var data = [];
 
-        fetch(url)
-        .then(function(response) {
-            return response.json();
+
+        Promise.all(urls.map( (url) => {
+            return fetch(url);
           })
-        .then(function(json) {
-            var descriptionURI = "http://pokeapi.co" + json.descriptions[0].resource_uri;
-            var pokeDescription = "";
-          })
-        .catch(function(err){
-              alert(err);
-          });
-
-//
-
-          fetch(url)
-          .then(function(response) {
-              return response.json();
+        )
+        .then( (response) => {
+            return Promise.all(
+              response.map( (res) => {
+              return res.json();
             })
-          .then(function(json2) {
-              pokeDescription = json2.description;
-              // console.log("Description URI: ", data);
-              // console.log("Description: ", pokeDescription);
-              // console.log(pokeDescription);
-            })
-          .catch(function(err){
-                alert(err);
-            });
+          )
+        })
+        .then( (result) => {
+            // const descriptionURI = "http://pokeapi.co" + result[0].descriptions[0].resource_uri;
+            // urls.push(descriptionURI);
+            // displayPokemon(result);
+            // console.log(descriptionURI);
+
+            // return fetch(descriptionURI);
+
+            data["results"] = result;
+            displayPokemon(data);
+        })
+        // .then ( (descriptions,result) => {
+        //     console.log(descriptions);
+        //     console.log("results " + result);
+        // })
+        .catch( (error) => {
+          alert(error);
+        })
+        console.log(result);
 
 
-          fetch(url2).then(function(response) {
-              return response.json();
-            }).then(function(json3) {
-              var imageURI = json3.sprites.front_default;
-              console.log(imageURI);
-            }).catch(function(err){
-                alert(err);
-            });
+        // console.log(data);
+
+
+          // displayPokemon(data);
+
+          //
+          // fetch(descriptionURI)
+          // .then(function(response) {
+          //     return response.json();
+          //   })
+          // .then(function(json) {
+          //
+          //     // console.log("Description URI: ", data);
+          //     // console.log("Description: ", pokeDescription);
+          //
+          //   })
+          // .catch(function(err){
+          //       alert(err);
+          //   });
+
+
+          // fetch(url2, {method:'get'}).then(function(response) {
+          //     return response.json();
+          //   }).then(function(json3) {
+          //     var imageURI = json3.sprites.front_default;
+          //     // data.push({"image": imageURI});
+          //     // console.log(imageURI);
+          //   }).catch(function(err){
+          //       alert(err);
+          //   });
+          // // console.log(data);
+
+
+
 
     };
 
-    this.displayPokemon = function(data){
+    this.displayPokemon = (json) => {
         var content_container = document.querySelector("#content-container");
         var template = "";
 
-      //       for(var i in json){
-      //         if (json.hasOwnProperty(i)) {
-      //       console.log(i, json[i]);
+      //       for(var i in data){
+      //         if (data.hasOwnProperty(i)) {
+      //       console.log(i, data[i]);
       //   }
       // }
-      var pokeID = data.national_id;
-      var pokeName = data.name;
-      var pokeType1 = data.types[0].name;
-      if (data.types.length == 2) {
-          var pokeType2 = data.types[1].name;
-        } else {
-          var pokeType2 = null;
-        }
-      console.log(pokeID,pokeName,pokeType1,pokeType2);
-      console.log(data2);
+
+      // const pokeID = json[0].national_id;
+      // const pokeName = json[0].name;
+      // const pokeType1 = json[0].types[0].name;
+      // if (json[0].types.length == 2) {
+      //     const pokeType2 = json[0].types[1].name;
+      //   } else {
+      //     const pokeType2 = null;
+      //   }
+
+
+      // let pokeDescription = "";
+
+      console.log(json['results'][0]);
+
+
+
+
         // for(var i = 0; i < json.length; i++){
         //       // template += '<div class="card_list">'+ json[i].name +'</div>';
         //       // template += '<div style="background:url('+ json.sprites[i].resource_uri +');"</div>';
         // }
 
-        // template += '<div>'+ json.name +'</div>';
+        // template += '<div>'+ pokeName +'</div>';
         //
         // console.log(`name: ${json.name}`);
         // console.log(`ID: ${json.national_id}`);
