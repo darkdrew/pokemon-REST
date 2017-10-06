@@ -5,6 +5,10 @@
     <title>Pokemon App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cairo:700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -13,31 +17,23 @@
     <div class="container">
         <div class="row" id="search">
           <div class="wrapper">
-            <h1>Find your pokemon(REST API)</h1>
-            <p>Search for your favourite pokemon!</p>
+            <h1>Pokedex for pokemon</h1>
+            <h2>Search for your favourite pokemon!</h2>
+              <form id="form">
+                  <input type="text" placeholder="Type pokemon name or id" id="input_search"/>
+                  <i id="btn-submit" class="fa fa-search"></i>
+              </form>
           </div>
         </div>
 
         <div class="row" id="content-container">
 
-
-
-            <!-- <div class="col-sm-6" style="background:blue;">
-              <div class="col-sm-12 sprite-img" style="background:pink;">pokemon photo</div>
-              <div class="col-sm-12" style="background:darkRed;">pokemon ID</div>
-              <div class="col-sm-12 card-list">Pokemon Name</div>
-              <div class="col-sm-12" style="background:darkRed;">Pokemon Type 1</div>
-              <div class="col-sm-12" style="background:pink;">Pokemon Type 2</div>
-            </div>
-            <div class="col-sm-6" style="background:blue;">
-              <div class="col-sm-12" style="background:yellow;">Pokemon description</div>
-              <div class="col-sm-12" style="background:pink;">Pokemon species</div>
-              <div class="col-sm-12" style="background:pink;">attack stat</div>
-              <div class="col-sm-12" style="background:pink;">defense stat</div>
-              <div class="col-sm-12" style="background:pink;">gender</div>
-            </div> -->
         </div>
-        
+
+        <div id="not_match">
+        Sorry, wrong pokemon name.
+        </div>
+
     </div>
 
   </body>
